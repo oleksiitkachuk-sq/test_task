@@ -7,8 +7,6 @@ import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import org.fwork.objects.Car;
 import org.openqa.selenium.By;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.task.BaseTest;
 import org.task.commons.Constants;
 import org.task.helpers.MobileHelper;
@@ -16,6 +14,8 @@ import org.task.pages.MainActivityPage;
 import org.testng.Assert;
 
 import java.util.List;
+
+import static org.task.helpers.MobileHelper.isElementNotPresent;
 
 public class MainActivitySteps extends BaseTest {
 
@@ -29,7 +29,7 @@ public class MainActivitySteps extends BaseTest {
     public void openCarDialog(boolean isAppOpenFirstTime, boolean isCarHasBeenAdded) {
         mainActivityPage = new MainActivityPage(driver);
         if (isAppOpenFirstTime) {
-            waitForElement(driver, By.id(String.format("%s:id/btnCheckIn", Constants.APP_PACKAGE)),
+            MobileHelper.waitForElement(driver, By.id(String.format("%s:id/btnCheckIn", Constants.APP_PACKAGE)),
                     Constants.WAIT_FOR_ELEMENTS);
             mainActivityPage.closeCheckInPopup();
         }
@@ -47,7 +47,7 @@ public class MainActivitySteps extends BaseTest {
         swipeSwipePanelToLeft();
         mainActivityPage.tapDeleteCarButton();
         boolean isContentPanelNotPresent =
-                isElementNotPresent(By.id("de.autodoc.gmbh:id/swipeContent"));
+                isElementNotPresent(driver, By.id("de.autodoc.gmbh:id/swipeContent"));
         Assert.assertTrue(isContentPanelNotPresent, "ContentPanel is not present on view");
     }
 
@@ -69,6 +69,6 @@ public class MainActivitySteps extends BaseTest {
         Thread.sleep(500);
         // waiting animation. TODO wait for 'add new car' panel
         MobileHelper.swipeMobileElement(driver, mainActivityPage.swipeElement(), Direction.LEFT, "swipePanel");
-        waitForElement(driver, mainActivityPage.editCarButton(), Constants.WAIT_FOR_ELEMENTS);
+        MobileHelper.waitForElement(driver, mainActivityPage.editCarButton(), Constants.WAIT_FOR_ELEMENTS);
     }
 }

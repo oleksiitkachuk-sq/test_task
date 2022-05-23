@@ -40,12 +40,12 @@ public class DeleteCarTests extends BaseTest {
         modifyCarSteps.modifyCarStep(firstCar, Views.ADD_CAR_VIEW, "Add car step");
         mainActivitySteps.verifyCarInSwipePanel(firstCar);
         mainActivitySteps.deleteCarInSwipePanel();
+        Allure.addAttachment("View after delete vehicle", new ByteArrayInputStream(((TakesScreenshot) driver).
+                getScreenshotAs(OutputType.BYTES)));
+
     }
 
     @Test
-    @Description("This is a positive test that checks for delete a car.")
-    @Feature("Delete a car on modify car View")
-    @Severity(SeverityLevel.BLOCKER)
     @Ignore
     public void deleteCarOnModifyCarViewTest() {
 

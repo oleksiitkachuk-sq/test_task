@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.task.BaseTest;
 import org.task.commons.Constants;
+import org.task.helpers.MobileHelper;
 import org.task.helpers.TextHelper;
 import org.task.pages.CountryConfirmActivityPage;
 import org.testng.Assert;
@@ -29,7 +30,7 @@ public class SelectCountrySteps extends BaseTest {
     public void verifyWelcomeText() {
         countryConfirmPage = new CountryConfirmActivityPage(driver);
         // wait for CountryConfirmActivity
-        waitForElement(driver, By.id(String.format("%s:id/tvChooseCountryText", Constants.APP_PACKAGE)),
+        MobileHelper.waitForElement(driver, By.id(String.format("%s:id/tvChooseCountryText", Constants.APP_PACKAGE)),
                 Constants.WAIT_FOR_ELEMENTS);
         Assert.assertEquals(Constants.APP_PACKAGE, driver.getCurrentPackage());
         Assert.assertTrue(countryConfirmPage.isHeaderExist(), "CountryConfirmActivity is not displayed!");

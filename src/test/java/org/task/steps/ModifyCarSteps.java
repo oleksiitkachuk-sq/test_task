@@ -16,6 +16,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 
+import static org.task.helpers.MobileHelper.isElementNotPresent;
 import static org.task.helpers.TextHelper.getTextFromJson;
 
 public class ModifyCarSteps extends BaseTest {
@@ -42,7 +43,7 @@ public class ModifyCarSteps extends BaseTest {
             carPage = new ModifyCarPage(driver);
         carPage.tapDeleteCarButton();
         boolean isContentPanelNotPresent =
-                isElementNotPresent(By.id("de.autodoc.gmbh:id/swipeContent"));
+                isElementNotPresent(driver, By.id("de.autodoc.gmbh:id/swipeContent"));
         Assert.assertTrue(isContentPanelNotPresent, "ContentPanel is not present on view");
     }
 
