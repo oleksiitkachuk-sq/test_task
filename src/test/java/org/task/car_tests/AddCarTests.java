@@ -8,13 +8,13 @@ import org.fwork.objects.Car;
 import org.task.BaseTest;
 import org.task.commons.CountryNames;
 import org.task.commons.Views;
-import org.task.steps.ModifyCarSteps;
 import org.task.steps.MainActivitySteps;
+import org.task.steps.ModifyCarSteps;
 import org.task.steps.SelectCountrySteps;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.task.helpers.TextHelper.getCars;
+import static org.task.helpers.TextHelper.getCarByIndex;
 
 @Severity(SeverityLevel.NORMAL)
 public class AddCarTests extends BaseTest {
@@ -32,9 +32,8 @@ public class AddCarTests extends BaseTest {
         mainActivitySteps.openCarDialog(true, false);
 
         ModifyCarSteps addCarSteps = new ModifyCarSteps(driver);
-        Car car = getCars()[0];
-        Assert.assertNotNull(car, "Assert for Car validation is failed. Car object is null!");
-        addCarSteps.modifyCarSteps(car, Views.ADD_CAR_VIEW, "Add car step");
+        Car car = getCarByIndex(0);
+        addCarSteps.modifyCarStep(car, Views.ADD_CAR_VIEW, "Add car step");
         mainActivitySteps.verifyCarInSwipePanel(car);
     }
 }

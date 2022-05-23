@@ -2,14 +2,13 @@ package org.task.steps;
 
 
 import com.sun.javafx.scene.traversal.Direction;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import org.fwork.objects.Car;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.task.BaseTest;
 import org.task.commons.Constants;
 import org.task.helpers.MobileHelper;
@@ -36,18 +35,20 @@ public class MainActivitySteps extends BaseTest {
         }
         if (isCarHasBeenAdded) {
             swipeSwipePanelToLeft();
-            mainActivityPage.tapToEditCarButton();
+            mainActivityPage.tapEditCarButton();
         } else {
             Assert.assertTrue(mainActivityPage.isAddCarButtonExist(), "AddCarButton exist.");
-            mainActivityPage.tapToAddCarButton();
+            mainActivityPage.tapAddCarButton();
         }
     }
 
-    @SneakyThrows
     @Step("Delete car in swipe panel.")
-    public void deleteCar() {
+    public void deleteCarInSwipePanel() {
         swipeSwipePanelToLeft();
-        mainActivityPage.tapToDeleteCarButton();
+        mainActivityPage.tapDeleteCarButton();
+        boolean isContentPanelNotPresent =
+                isElementNotPresent(By.id("de.autodoc.gmbh:id/swipeContent"));
+        Assert.assertTrue(isContentPanelNotPresent, "ContentPanel is not present on view");
     }
 
     @Step("Verify added car in swipe panel")
@@ -62,8 +63,9 @@ public class MainActivitySteps extends BaseTest {
 
     @SneakyThrows
     @Step()
-    private void swipeSwipePanelToLeft(){
-        mainActivityPage.tapToSwipeContentPanel();
+    private void swipeSwipePanelToLeft() {
+        mainActivityPage.tapSwipeContentPanel();
+        mainActivityPage.isAddNewVehicleExist("Add a new vehicle");
         Thread.sleep(500);
         // waiting animation. TODO wait for 'add new car' panel
         MobileHelper.swipeMobileElement(driver, mainActivityPage.swipeElement(), Direction.LEFT, "swipePanel");

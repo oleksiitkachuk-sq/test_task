@@ -32,13 +32,26 @@ public class TextHelper {
         return jsonObject.getAsJsonObject(parentKey).get(childKey).getAsString();
     }
 
-    public static Car[] getCars() {
+    public static Car[] getAllCars() {
         Gson gson = new Gson();
         try {
-            return gson.fromJson(new FileReader(Constants.PATH_TO_CAR_TEXT), Car[].class);
+            Car[] cars = gson.fromJson(new FileReader(Constants.PATH_TO_CAR_TEXT), Car[].class);
+            Assert.assertNotNull(cars, "Assert for Car[] validation is failed. Car[] is null!");
+            return cars;
         } catch (FileNotFoundException e) {
             Assert.fail(String.format("File from path [%s] not found! %s",
                     Constants.PATH_TO_CAR_TEXT, e));
+        }
+        return null;
+    }
+
+    public static Car getCarByIndex(int index) {
+        try {
+            Car[] cars = getAllCars();
+            return cars[index];
+        }catch (ArrayIndexOutOfBoundsException exception){
+            Assert.fail(String.format("Index [%d] negative, greater than, or equal to the length of the array. [%s]",
+                    index, exception));
         }
         return null;
     }

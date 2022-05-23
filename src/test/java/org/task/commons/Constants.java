@@ -19,4 +19,5 @@ public class Constants {
     private static int port = 4723;
     final public static String URL_TO_APPIUM = String.format("http://127.0.0.1:%d/wd/hub", port);
     final public static int WAIT_FOR_ELEMENTS = 500;
+    final public static int WAIT_FOR_ELEMENTS_IN_SEC = 30;
 }

@@ -4,14 +4,11 @@ import com.sun.javafx.scene.traversal.Direction;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.time.Duration;
@@ -81,7 +78,7 @@ public class MobileHelper {
     }
 
     @Attachment(value = "Screenshot", type = "image/png")
-    public static File takeScreenshot(AndroidDriver driver){
-        return  ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    public static File takeScreenshot(AndroidDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
     }
 }

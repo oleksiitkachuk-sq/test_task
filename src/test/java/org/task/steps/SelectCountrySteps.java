@@ -42,8 +42,9 @@ public class SelectCountrySteps extends BaseTest {
             logger.error(e.toString());
         }
     }
+
     @Step("Select {0} country")
-    public void selectCountry(String country){
+    public void selectCountry(String country) {
         countryConfirmPage.selectCountry(country);
     }
 

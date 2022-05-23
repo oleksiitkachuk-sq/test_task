@@ -6,6 +6,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.task.commons.Constants;
 import org.testng.Assert;
@@ -52,33 +53,34 @@ public class ModifyCarPage {
         return modifyCarDialogHeader.isDisplayed();
     }
 
-    @Step("Tap to save button")
-    public void tapToSaveCarButton() {
-        saveButton.click();
-    }
-
-    @Step("Tap to delete car button")
-    public void tapToDeleteCarButton() {
-        deleteButton.click();
-    }
-
-    @Step("Tap to car maker field")
-    public void tapToCarMakerField() {
-        carMakerField.click();
-    }
-
-    @Step("Tap to model field")
-    public void tapToModelField() {
-        modelField.click();
-    }
-
-    @Step("Tap to modification field")
-    public void tapToModificationField() {
-        modificationField.click();
-    }
 
     public boolean isSearchFieldExist() {
         return searchField.isDisplayed();
+    }
+
+    @Step("Tap save button")
+    public void tapSaveCarButton() {
+        saveButton.click();
+    }
+
+    @Step("Tap delete car button")
+    public void tapDeleteCarButton() {
+        deleteButton.click();
+    }
+
+    @Step("Tap car maker field")
+    public void tapCarMakerField() {
+        carMakerField.click();
+    }
+
+    @Step("Tap model field")
+    public void tapModelField() {
+        modelField.click();
+    }
+
+    @Step("Tap modification field")
+    public void tapModificationField() {
+        modificationField.click();
     }
 
     @Step("Type [{0}] to 'search field'")
@@ -89,9 +91,9 @@ public class ModifyCarPage {
     }
 
     @Step("Tap item in search result: [{0}]")
-    public void tapToItemInSearchResult(String text) {
-        List<AndroidElement> elements = driver.findElements(By.id(String.format("%s:id/title", Constants.APP_PACKAGE)));
-        for (AndroidElement elem : elements) {
+    public void tapItemInSearchResult(String text) {
+        List<WebElement> elements = driver.findElements(By.id(String.format("%s:id/title", Constants.APP_PACKAGE)));
+        for (WebElement elem : elements) {
             if (elem.getText().equals(text)) {
                 elem.click();
             }

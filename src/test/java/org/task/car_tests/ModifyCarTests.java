@@ -8,14 +8,13 @@ import org.fwork.objects.Car;
 import org.task.BaseTest;
 import org.task.commons.CountryNames;
 import org.task.commons.Views;
-import org.task.steps.ModifyCarSteps;
 import org.task.steps.MainActivitySteps;
+import org.task.steps.ModifyCarSteps;
 import org.task.steps.SelectCountrySteps;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static org.task.helpers.TextHelper.getCars;
+import static org.task.helpers.TextHelper.getAllCars;
 
 @Severity(SeverityLevel.NORMAL)
 public class ModifyCarTests extends BaseTest {
@@ -33,20 +32,14 @@ public class ModifyCarTests extends BaseTest {
         mainActivitySteps.openCarDialog(true, false);
 
         ModifyCarSteps modifyCarSteps = new ModifyCarSteps(driver);
-        Car[] cars = getCars();
-        Assert.assertNotNull(cars, "Assert for Car[] validation is failed. Car[] is null!");
+        Car[] cars = getAllCars();
         Car firstCar = cars[0];
-        modifyCarSteps.modifyCarSteps(firstCar, Views.ADD_CAR_VIEW, "Add car step");
+        modifyCarSteps.modifyCarStep(firstCar, Views.ADD_CAR_VIEW, "Add car step");
         mainActivitySteps.verifyCarInSwipePanel(firstCar);
 
         mainActivitySteps.openCarDialog(false, true);
         Car secondCar = cars[1];
-        modifyCarSteps.modifyCarSteps(secondCar, Views.EDIT_CAR_VIEW, "Edit car step");
+        modifyCarSteps.modifyCarStep(secondCar, Views.EDIT_CAR_VIEW, "Edit car step");
         mainActivitySteps.verifyCarInSwipePanel(secondCar);
-    }
-
-    @Test
-    @Ignore
-    public void modifyCarWithIllegalSymbolsTest() {
     }
 }

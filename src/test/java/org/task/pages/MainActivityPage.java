@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.task.commons.Constants;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -46,6 +47,17 @@ public class MainActivityPage {
     @AndroidFindBy(id = "de.autodoc.gmbh:id/btnDelete")
     private AndroidElement deleteCarButton;
 
+    // TODO needs id for this field
+    public boolean isAddNewVehicleExist(String text) {
+        List<AndroidElement> elements = driver.findElements(By.id(String.format("%s:id/tvTitle", Constants.APP_PACKAGE)));
+        for (AndroidElement elem : elements) {
+            if (elem.getText().equals(text)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isCheckInExist() {
         return checkIn.isDisplayed();
     }
@@ -54,47 +66,16 @@ public class MainActivityPage {
         return tryButton.isDisplayed();
     }
 
-    @Step("Tap to 'swipe content panel'")
-    public void tapToSwipeContentPanel(){
-        swipeContentPanel.click();
-    }
-
-    @Step("Tap to 'edit car button'")
-    public void tapToEditCarButton(){
-        editCarButton.click();
-    }
-
-    public AndroidElement editCarButton(){
+    public AndroidElement editCarButton() {
         return editCarButton;
     }
 
-    @Step("Tap to 'delete car button'")
-    public void tapToDeleteCarButton(){
-        deleteCarButton.click();
-    }
-
-    public AndroidElement swipeContentPanel(){
+    public AndroidElement swipeContentPanel() {
         return swipeContentPanel;
-    }
-
-    @Step("Close 'try now' popup.")
-    public void tapToTryButtonExist() {
-        tryButton.click();
-    }
-
-    @Step("Close 'CheckIn' popup.")
-    public void closeCheckInPopup() {
-        if (isCheckInExist()) closeButton.click();
-        else Assert.fail("CheckIn button is not displayed!");
     }
 
     public boolean isAddCarButtonExist() {
         return addCarButton.isDisplayed();
-    }
-
-    @Step("Tap 'add car' button.")
-    public void tapToAddCarButton() {
-        addCarButton.click();
     }
 
     public List<String> getCarDetails() {
@@ -104,7 +85,38 @@ public class MainActivityPage {
         return carDetailStrings;
     }
 
-    public MobileElement swipeElement(){
+    public MobileElement swipeElement() {
         return swipeContentPanel.findElement(By.xpath("//android.widget.ImageView"));
+    }
+
+    @Step("Tap 'add car' button.")
+    public void tapAddCarButton() {
+        addCarButton.click();
+    }
+
+    @Step("Tap 'delete car button'")
+    public void tapDeleteCarButton() {
+        deleteCarButton.click();
+    }
+
+    @Step("Close 'CheckIn' popup.")
+    public void closeCheckInPopup() {
+        if (isCheckInExist()) closeButton.click();
+        else Assert.fail("CheckIn button is not displayed!");
+    }
+
+    @Step("Close 'try now' popup.")
+    public void tapTryButtonExist() {
+        tryButton.click();
+    }
+
+    @Step("Tap 'swipe content panel'")
+    public void tapSwipeContentPanel() {
+        swipeContentPanel.click();
+    }
+
+    @Step("Tap 'edit car button'")
+    public void tapEditCarButton() {
+        editCarButton.click();
     }
 }

@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name = "Car tests">
+<suite name = "Modify car tests">
     <test name = "Add car tests">
         <classes>
             <class name = "org.task.car_tests.AddCarTests" />

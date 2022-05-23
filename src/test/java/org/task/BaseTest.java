@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,12 +29,25 @@ public class BaseTest {
         wait.until(ExpectedConditions.elementToBeClickable(elem));
     }
 
+    public boolean isElementNotPresent(By by) {
+        try {
+            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+            driver.findElement(by);
+            return false;
+        } catch (NoSuchElementException e) {
+            return true;
+        }
+        finally {
+            driver.manage().timeouts().implicitlyWait(Constants.WAIT_FOR_ELEMENTS_IN_SEC, TimeUnit.SECONDS);
+        }
+    }
+
     @BeforeTest
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = getCapabilities();
         URL url = new URL(Constants.URL_TO_APPIUM);
         driver = new AndroidDriver(url, caps);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Constants.WAIT_FOR_ELEMENTS_IN_SEC, TimeUnit.SECONDS);
     }
 
     @AfterTest
@@ -50,7 +64,6 @@ public class BaseTest {
         caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, Constants.PLATFORM_VERSION);
         caps.setCapability(MobileCapabilityType.DEVICE_NAME, Constants.DEVICE_NAME);
         caps.setCapability(MobileCapabilityType.APP, Constants.PATH_TO_APP.getPath().substring(1));
-//        caps.setCapability("appPackage", Constants.APP_PACKAGE);
         return caps;
     }
 }
