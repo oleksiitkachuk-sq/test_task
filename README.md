@@ -1,4 +1,5 @@
 # test_task
+#### Maven, TextNG, Appium, Allure.
 ### Running tests
 ```
 mvn clean test
