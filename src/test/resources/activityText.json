@@ -1,0 +1,9 @@
+{
+  "countryConfirmActivity": {
+    "welcomeText": "For right currency selection and VAT amount assessment, please choose your country:"
+  },
+  "carView": {
+    "addCarHeaderText": "ADD CAR BY MODEL",
+    "editCarHeaderText": "EDIT YOUR VEHICLES"
+  }
+}
