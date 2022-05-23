@@ -7,14 +7,12 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.task.commons.Constants;
 
-import java.io.File;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -77,7 +75,7 @@ public class MobileHelper {
         }
 
         try {
-            Thread.sleep(ANIMATION_TIME);
+            Thread.sleep(Constants.ANDROID_ANIMATION);
         } catch (InterruptedException e) {
         }
     }

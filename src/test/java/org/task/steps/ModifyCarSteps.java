@@ -72,8 +72,6 @@ public class ModifyCarSteps extends BaseTest {
                     JsonFields.CAR_VIEW, headerText);
             if (view == Views.ADD_CAR_VIEW)
                 TextHelper.verifyText(carPage.getHeaderText(), expectedHeaderText);
-            else if (view == Views.EDIT_CAR_VIEW)
-                System.out.println();
         } catch (IOException e) {
             logger.error(e.toString());
         }

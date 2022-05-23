@@ -61,13 +61,10 @@ public class MainActivitySteps extends BaseTest {
     }
 
 
-    @SneakyThrows
     @Step()
     private void swipeSwipePanelToLeft() {
         mainActivityPage.tapSwipeContentPanel();
         mainActivityPage.isAddNewVehicleExist("Add a new vehicle");
-        Thread.sleep(500);
-        // waiting animation. TODO wait for 'add new car' panel
         MobileHelper.swipeMobileElement(driver, mainActivityPage.swipeElement(), Direction.LEFT, "swipePanel");
         MobileHelper.waitForElement(driver, mainActivityPage.editCarButton(), Constants.WAIT_FOR_ELEMENTS);
     }

@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -90,10 +91,13 @@ public class ModifyCarPage {
         else Assert.fail("Search field is not displayed!");
     }
 
+    @SneakyThrows
     @Step("Tap item in search result: [{0}]")
     public void tapItemInSearchResult(String text) {
         List<WebElement> elements = driver.findElements(By.id(String.format("%s:id/title", Constants.APP_PACKAGE)));
         for (WebElement elem : elements) {
+            // TODO wait for elementToBeClickable
+            Thread.sleep(Constants.ANDROID_ANIMATION);
             if (elem.getText().equals(text)) {
                 elem.click();
             }
