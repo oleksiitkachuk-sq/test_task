@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "Car tests">
+    <test name = "Add car tests">
+        <classes>
+            <class name = "org.task.car_tests.AddCarTests" />
+        </classes>
+    </test>
+    <test name = "Modify car tests">
+        <classes>
+            <class name = "org.task.car_tests.ModifyCarTests" />
+        </classes>
+    </test>
+    <test name = "Delete car tests">
+        <classes>
+            <class name = "org.task.car_tests.DeleteCarTests" />
+        </classes>
+    </test>
+</suite>
